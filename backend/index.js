@@ -1,11 +1,13 @@
 import express from "express";
 import supabase from "./supabase.js";
 import "dotenv/config";
+import cors from "cors"
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
+app.use(cors())
 
 //* Reference Object
 const cardListForReference =

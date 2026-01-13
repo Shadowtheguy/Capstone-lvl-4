@@ -2,8 +2,14 @@ import { useState } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+function translateToSearch(string) {
+  return string.replaceAll(" ", "+")
+}
+
 function App() {
   const [deckList, setDeckList] = useState(null);
+  cosnt [cardToSearch, setCardToSearch] = useState("")
+  const [currentCard, setCurrentCard] = useState(null);
 
   function parseCardList(cardListString) {
     return cardListString
@@ -30,11 +36,25 @@ function App() {
   }
 
   function tempDeckChange(event) {
+    event.preventDefault()
+
     fetch("http://localhost:3000/mtgdecks/1")
       .then((response) => response.json())
       .then(getDeckListTemp)
       .then(setDeckList);
 
+  }
+
+  function tempSearchForCard(event) {
+    
+  }
+
+  function tempCardChange() {
+    event.preventDefault()
+
+    fetch("http://localhost:3001/api/MTGcard/" + cardToSearch)
+      .then((response) => response.json())
+      //! Finish
   }
 
   return (

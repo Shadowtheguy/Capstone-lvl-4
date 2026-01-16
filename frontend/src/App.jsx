@@ -2,15 +2,18 @@ import { useState, useRef } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+//* Helper Functions
 function translateToSearch(string) {
   return string.replaceAll(" ", "+");
 }
 
 function App() {
+  //* Variables
   const [deckList, setDeckList] = useState(null);
   const [currentCard, setCurrentCard] = useState(null);
   const currentSearch = useRef("");
 
+  //* Decoding the Deck List
   function parseCardList(cardListString) {
     return cardListString
       .split("\n")
@@ -25,6 +28,7 @@ function App() {
       });
   }
 
+  //* Filtering Information
   function getDeckListTemp(deckData) {
     return {
       deckTitle: deckData.deck_title,
@@ -45,6 +49,7 @@ function App() {
     };
   }
 
+  //* Fetch the Deck List
   function tempDeckChange(event) {
     event.preventDefault();
 
@@ -54,17 +59,22 @@ function App() {
       .then(setDeckList);
   }
 
-  function tempSearchForCard(event) {
-    event.preventDefault();
+  //* Fetch the Searched Card
+  function fetchCard(cardName) {
+    const fetchCard = translateToSearch(cardName);
 
-    const cardInput = currentSearch.current.value;
-    const fetchCard = translateToSearch(cardInput);
-
-    fetch("http://localhost:3001/api/MTGcard/" + fetchCard).then((response) =>
-      response.json().then(getCardinfo).then(setCurrentCard)
-    );
+    fetch("http://localhost:3001/api/MTGcard/" + fetchCard)
+      .then((response) => response.json())
+      .then(getCardinfo)
+      .then(setCurrentCard);
   }
 
+  function searchForCard(event) {
+    event.preventDefault();
+    fetchCard(currentSearch.current.value);
+  }
+
+  //*HTML
   return (
     <>
       <section>
@@ -86,7 +96,7 @@ function App() {
             ref={currentSearch}
             className="col-3 bg-secondary border border-danger"
           />
-          <button onClick={tempSearchForCard} className="btn btn-danger col-1">
+          <button onClick={searchForCard} className="btn btn-danger col-1">
             Search
           </button>
         </div>
@@ -100,7 +110,13 @@ function App() {
               {deckList &&
                 deckList.cardList.map((card, index) => (
                   <li key={index}>
-                    {card.qty} {card.name}
+                    {card.qty}{" "}
+                    <button
+                      className="btn btn-link p-0 text-danger"
+                      onClick={() => fetchCard(card.name)}
+                    >
+                      {card.name}
+                    </button>
                   </li>
                 ))}
             </ul>

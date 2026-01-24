@@ -1,5 +1,14 @@
 * {
-background-color: #1b2124;
-color: #cdb1b1;
+  background-color: #1b2124;
+  color: #cdb1b1;
 }
 
+.loginbuttons {
+  background-color: rgb(214, 47, 47);
+  border-color: black;
+  max-height: 40px;
+  font-size: 85%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

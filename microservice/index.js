@@ -12,24 +12,41 @@ app.get("/", (req, res) => {
   res.json({ message: "Microservice is running" });
 });
 
-app.get("/api/MTGcard/:name", async (req, res) => {
-  const name = req.params.name
+app.get("/api/MTGcardTest/:name", async (req, res) => {
+  const name = req.params.name;
 
-  const url = `https://api.scryfall.com/cards/named?fuzzy=${name}`
+  const url = `https://api.scryfall.com/cards/named?fuzzy=${name}`;
 
-  console.log(`Fetching information for cards related to ${name}`)
+  console.log(`Fetching information for cards related to ${name}`);
 
-  if(!name) {
-    return res.status(404).json({ error: "Name Required" })
+  if (!name) {
+    return res.status(404).json({ error: "Name Required" });
   }
 
   const response = await fetch(url);
   const data = await response.json();
 
-  console.log(data)
+  console.log(data);
 
-  res.status(201).json(data)
-})
+  res.status(201).json(data);
+});
+
+app.get("api/MTGcard/:name", async (req, res) => {
+  const name = req.params.name;
+
+  const url = `https://api.scryfall.com/cards/search?q=${name}&order=name`;
+
+  if (!name) {
+    return res.status(404).json({ error: "Name Required" });
+  }
+
+  const response = await fetch(url);
+  const data = await response.json();
+
+  console.log(data);
+
+  res.status(201).json(data);
+});
 
 app.listen(PORT, () => {
   console.log(`Microservice running on port ${PORT}`);

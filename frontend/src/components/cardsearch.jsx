@@ -1,8 +1,39 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+//* Helper Functions
+function translateToSearch(string) {
+  return string.replaceAll(" ", "+");
+}
+
 function CardSearch() {
+  //* Variables
+  // Navigation
   const navigate = useNavigate();
+
+  // Card Searching
+  const [currentSearch, setCurrentSearch] = useState("")
+  const [currentCards, setCurrentCards] = useState(null)
+
+  //* Fetch Functions
+  function fetchCard(cardName) {
+    const fetchCard = translateToSearch(cardName);
+
+    fetch("http://localhost:3001/api/MTGcard/" + fetchCard)
+      .then((response) => response.json())
+      .then(getCardinfo)
+      .then(setCurrentCards);
+  }
+
+  function searchForCard(event) {
+    event.preventDefault();
+    fetchCard(currentSearch);
+  }
+
+  //* Search on Page Startup
+  useEffect(() => {
+    fetchCard(currentSearch)
+  })
 
   return (
     <>
@@ -43,6 +74,7 @@ function CardSearch() {
         </div>
       </section>
       <hr />
+      <section></section>
     </>
   );
 }

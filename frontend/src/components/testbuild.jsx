@@ -61,7 +61,7 @@ function TestBuild() {
   function fetchCard(cardName) {
     const fetchCard = translateToSearch(cardName);
 
-    fetch("http://localhost:3001/api/MTGcard/" + fetchCard)
+    fetch("http://localhost:3001/api/MTGcardTest/" + fetchCard)
       .then((response) => response.json())
       .then(getCardinfo)
       .then(setCurrentCard);

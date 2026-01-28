@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -10,6 +11,11 @@ import DeckList from "./components/decklist";
 import LogIn from "./components/login";
 
 function App() {
+  //* Variables
+  const [user, setUser] = useState(
+    sessionStorage.getItem('userInfo') || ''
+  );
+
   //*HTML
   return (
     <Routes>

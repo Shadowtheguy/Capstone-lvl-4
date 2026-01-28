@@ -31,7 +31,7 @@ app.get("/api/MTGcardTest/:name", async (req, res) => {
   res.status(201).json(data);
 });
 
-app.get("api/MTGcard/:name", async (req, res) => {
+app.get("/api/MTGcard/:name", async (req, res) => {
   const name = req.params.name;
 
   const url = `https://api.scryfall.com/cards/search?q=${name}&order=name`;

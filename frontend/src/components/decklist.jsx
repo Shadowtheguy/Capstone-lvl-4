@@ -11,10 +11,10 @@ function DeckList() {
         <div className="row">
           <div className="col-3"></div>
           <h1 className="text-center col-6">Creative Deck-nique!</h1>
-          <button className="col-1 m-1 btn btn-danger loginbuttons">
+          <button className="col-1 m-1 btn btn-danger loginbuttons" onClick={() => navigate("/LogIn")}>
             Log In
           </button>
-          <button className="col-1 m-1 btn btn-danger loginbuttons">
+          <button className="col-1 m-1 btn btn-danger loginbuttons" onClick={() => navigate("/LogIn")}>
             Sign Up
           </button>
         </div>

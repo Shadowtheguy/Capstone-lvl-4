@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function translateToSearch(string) {
-  return string.replaceAll(" ", "+");
+  return encodeURIComponent(string);
 }
 
 function DeckScreen() {
@@ -11,8 +11,16 @@ function DeckScreen() {
 
   //* Variables
   const [createdDecks, setCreatedDecks] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   //* Functions
+  // Card Search
+  function handleSearch(event) {
+    event.preventDefault();
+    if (!searchTerm) return;
+    navigate(`/CardSearch?query=${encodeURIComponent(searchTerm)}`);
+  }
+
   // Filtering the deck items
   function parseCardList(cardListString) {
     return cardListString
@@ -128,8 +136,15 @@ function DeckScreen() {
           <input
             type="text"
             className="col-2 bg-secondary border border-danger"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") handleSearch(e);
+            }}
           />
-          <button className="btn btn-danger col-1">Search</button>
+          <button className="btn btn-danger col-1" onClick={handleSearch}>
+            Search
+          </button>
         </div>
       </section>
       <hr />

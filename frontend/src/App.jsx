@@ -23,7 +23,7 @@ function App() {
       <Route path="/Decks" element={<DeckScreen />} />
       <Route path="/CustomCard" element={<CardBuilder />} />
       <Route path="/DeckList" element={<DeckList />} />
-      <Route path="/Search" element={<CardSearch />} />
+      <Route path="/CardSearch" element={<CardSearch />} />
       <Route path="/LogIn" element={<LogIn />} />
       <Route path="/TestBuild" element={<TestBuild />} />
     </Routes>

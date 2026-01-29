@@ -25,7 +25,7 @@ function App() {
       <Route path="/DeckList" element={<DeckList />} />
       <Route path="/Search" element={<CardSearch />} />
       <Route path="/LogIn" element={<LogIn />} />
-      <Route path="/DevModeSuperSecret" element={<TestBuild />} />
+      <Route path="/TestBuild" element={<TestBuild />} />
     </Routes>
   );
 }

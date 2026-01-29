@@ -35,8 +35,8 @@ function LogIn() {
         <div className="col-6 d-flex justify-content-center">
           <form onSubmit={submitLogIn}>
             <br />
-            <label htmlFor="username">Email:</label>
-            <input type="text" id="username" placeholder="email@example.com" />
+            <label htmlFor="email">Email:</label>
+            <input type="text" id="email" placeholder="email@example.com" />
             <br /><br />
             <label htmlFor="password">Password: </label>
             <input type="password" name="password" id="password" />
@@ -47,11 +47,14 @@ function LogIn() {
         <div className="col-6 d-flex justify-content-center">
           <form>
             <br />
-            <label htmlFor="username">Email:</label>
-            <input type="text" id="username" placeholder="email@example.com" />
+            <label htmlFor="createUsername">Username:</label>
+            <input type="text" id="createUsername" />
             <br /><br />
-            <label htmlFor="password">Password:</label>
-            <input type="password" name="password" id="password" />
+            <label htmlFor="registerEmail">Email:</label>
+            <input type="text" id="registerEmail" placeholder="email@example.com" />
+            <br /><br />
+            <label htmlFor="registerPassword">Password:</label>
+            <input type="password" name="registerPassword" id="registerPassword" />
             <br /><br />
             <label htmlFor="confirm">Confirm Password:</label>
             <input type="password" name="confirm" id="confirm" />

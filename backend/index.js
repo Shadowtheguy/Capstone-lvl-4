@@ -1,13 +1,13 @@
 import express from "express";
 import supabase from "./supabase.js";
 import "dotenv/config";
-import cors from "cors"
+import cors from "cors";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
-app.use(cors())
+app.use(cors());
 
 //* Reference Object
 const cardListForReference =
@@ -19,10 +19,21 @@ const deckShape = {
   format: "Commander", //text
   card_list: cardListForReference, //text
   custom_cards: false, //boolean
+  deck_picture: "Roxanne, Starfall Savant", //text
 };
 
 app.get("/", (req, res) => {
   res.json({ message: "API is running" });
+});
+
+app.get("/mtgdecks", async (req, res) => {
+  const { data, error } = await supabase.from("MTG Deck Manager").select("*");
+
+  if (error) {
+    return res.status(400).json({ error: error.message });
+  }
+
+  res.status(200).json(data)
 });
 
 app.get("/mtgdecks/:id", async (req, res) => {
@@ -48,6 +59,7 @@ app.post("/mtgdecks", async (req, res) => {
     format,
     card_list,
     custom_cards,
+    deck_picture,
   };
 
   const { data, error } = await supabase

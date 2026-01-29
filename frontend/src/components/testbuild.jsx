@@ -34,6 +34,7 @@ function TestBuild() {
       format: deckData.format,
       cardList: parseCardList(deckData.card_list),
       hasCustomCards: deckData.custom_cards,
+      deckPicture: deckData.deck_picture
     };
   }
 

@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import supabase from "../utils/supabase";
 
 function translateToSearch(string) {
   return encodeURIComponent(string);
@@ -93,6 +94,12 @@ function DeckScreen() {
     fetch("http://localhost:3000/mtgdecks")
       .then((response) => response.json())
       .then(filterCreatedDecks);
+
+    supabase.auth.getUser()
+    .then((response) => {
+      const user = response?.data?.user
+      console.log("hello" + user?.email)
+    })
   }, []);
 
   //*HTML

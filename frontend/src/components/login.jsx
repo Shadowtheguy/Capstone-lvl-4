@@ -3,13 +3,15 @@ import { useNavigate } from "react-router-dom";
 import supabase from "../utils/supabase";
 
 
-function LogIn() {
+function LogIn({setUser}) {
+  //* Navigate
   const navigate = useNavigate();
 
+  //* Functions
   async function submitLogIn(event) {
     event.preventDefault();
     console.log(event);
-    const username = event.target.elements.username.value;
+    const username = event.target.elements.email.value;
     const password = event.target.elements.password.value;
 
     console.log(username, password);
@@ -21,7 +23,7 @@ function LogIn() {
 
     console.log(data, error);
 
-    sessionStorage.setItem("userInfo", data.user)
+    setUser(data.user)
     navigate("/")
   }
 

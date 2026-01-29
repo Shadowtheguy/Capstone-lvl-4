@@ -12,19 +12,17 @@ import LogIn from "./components/login";
 
 function App() {
   //* Variables
-  const [user, setUser] = useState(
-    sessionStorage.getItem('userInfo') || ''
-  );
+  const [user, setUser] = useState(null);
 
   //*HTML
   return (
     <Routes>
-      <Route path="/" element={<FrontPage />} />
+      <Route path="/" element={<FrontPage user={user} />} />
       <Route path="/Decks" element={<DeckScreen />} />
       <Route path="/CustomCard" element={<CardBuilder />} />
       <Route path="/DeckList" element={<DeckList />} />
       <Route path="/CardSearch" element={<CardSearch />} />
-      <Route path="/LogIn" element={<LogIn />} />
+      <Route path="/LogIn" element={<LogIn setUser={setUser} />}  />
       <Route path="/TestBuild" element={<TestBuild />} />
     </Routes>
   );

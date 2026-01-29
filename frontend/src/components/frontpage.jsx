@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
-function FrontPage() {
+function FrontPage({user}) {
   //* Naviagtion
   const navigate = useNavigate();
 
@@ -69,7 +69,7 @@ function FrontPage() {
       <hr />
       <section>
         <p className="m-2 text-center">
-          Welcome to my website! Here you can make deck lists for Magic the
+          Welcome to my website, {user?.email}! Here you can make deck lists for Magic the
           Gathering, as well as create custom cards for proxy use! Want to put
           those theoretical cards in a decklist? Go on ahead! Make sure to log
           in so you can save your progress. To get started, just click on one of

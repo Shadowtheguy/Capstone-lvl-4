@@ -17,6 +17,7 @@ function CardSearch() {
   //* Variables
   const [currentSearch, setCurrentSearch] = useState(initialQuery);
   const [currentCards, setCurrentCards] = useState([]);
+  const microserviceURL = import.meta.env.VITE_MICROSERVICE_URL
 
   //* Functions
   // Filtering Information
@@ -36,7 +37,7 @@ function CardSearch() {
   function fetchCard(cardName) {
     const fetchCardName = translateToSearch(cardName);
 
-    fetch("http://localhost:3001/api/MTGcard/" + fetchCardName)
+    fetch(`${microserviceURL}/api/MTGcard/` + fetchCardName)
       .then((response) => response.json())
       .then((data) => {
         const cardsArray = data.data || [];
@@ -54,7 +55,7 @@ function CardSearch() {
   //* Search on Page Startup
   useEffect(() => {
     if (currentSearch) fetchCard(currentSearch);
-  }, [currentSearch]);
+  }, []);
 
   return (
     <>
@@ -116,7 +117,7 @@ function CardSearch() {
                   alt={card.cardName}
                 />
                 <div className="card-body text-center">
-                  <h5 className="card-title">{card.cardName}</h5>
+                  <h5 className="card-title text-white">{card.cardName}</h5>
                   <p className="card-text">{card.cardType}</p>
                 </div>
               </div>
